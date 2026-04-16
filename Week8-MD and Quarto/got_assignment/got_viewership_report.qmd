@@ -56,7 +56,7 @@ season_summary <- got_all |>
 
 # Show Image
 
-![Game of Thrones logo](images/got_logo.jpg){fig-align="center" width="60%"}
+![Game of Thrones logo](images/got_logo.jpg){fig-align="center" width="70%"}
 
 # Basic Statistics
 
@@ -70,6 +70,8 @@ knitr::kable(
 # Viewership Over Time
 
 ```{r}
+#| fig-cap: "Average viewership across the eight seasons of Game of Thrones."
+
 ggplot(season_summary, aes(x = season, y = avg_viewers)) +
   geom_line() +
   geom_point() +
@@ -85,6 +87,8 @@ ggplot(season_summary, aes(x = season, y = avg_viewers)) +
 # Season-to-Season Change in Viewership
 
 ```{r}
+#| fig-cap: "Season-to-season change in average viewership."
+
 ggplot(season_summary[-1, ], aes(x = season, y = change_avg_viewers)) +
   geom_col() +
   geom_text(aes(label = change_avg_viewers), vjust = -0.3, size = 3) +
@@ -115,4 +119,8 @@ The largest increase from the previous season occurred in Season
 when average viewership rose by 
 `r max(season_summary$change_avg_viewers, na.rm = TRUE)` million viewers.  
 
-Overall, the show became more popular over time, although growth between Season 4 and Season 5 was almost flat.
+By contrast, the change between Season 4 and Season 5 was only 
+`r season_summary$change_avg_viewers[season_summary$season == 5]` million viewers, 
+which indicates almost no growth during that period.  
+
+Overall, the data show a clear upward trend in viewership across the eight seasons.
